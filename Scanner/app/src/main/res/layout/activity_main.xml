@@ -14,7 +14,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="0dp"
-        android:text="Barcode Text"
+        android:text=""
         android:textSize="25sp"
         android:padding="5dp"/>
 

@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC,     100);
+        toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC,     50);
         surfaceView = findViewById(R.id.surface_view);
         barcodeText = findViewById(R.id.barcode_text);
     }
@@ -138,12 +138,10 @@ public class MainActivity extends AppCompatActivity {
                             if(barcodeText.getText().equals("")){
                                 //keep retrying......
                             }else{
-
                                 new Handler().removeCallbacks(this);
                                 toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
                                 processResponse(this);
                                 barcodeDetector.release();
-
                             }
 
                         }
@@ -230,7 +228,13 @@ public class MainActivity extends AppCompatActivity {
      * ***/
     public int save(String contents) {
         try {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Environment.getExternalStorageDirectory().getPath()+"/csentry/COVID19/tempBarcode/barcode.txt")));
+
+            File f = new File(Environment.getExternalStorageDirectory().getPath()+"/csentry/COVID19 Community Testing App/tempBarcode/barcode.txt");
+            if(f.exists()){
+                f.delete();
+            }
+
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Environment.getExternalStorageDirectory().getPath()+"/csentry/COVID19 Community Testing App/tempBarcode/barcode.txt")));
             bw.write(contents);
             bw.close();
             return 1;
